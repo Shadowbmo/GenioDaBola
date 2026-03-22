@@ -22,8 +22,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color:rgb(61,64,62);
-
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 35%),
+    linear-gradient(135deg, #0b0b0f, #11131a, #090909);
   color: #fff;
   overflow: hidden;
   position: relative;
@@ -35,13 +36,8 @@ body::before {
   position: absolute;
   inset: 0;
   background-image: url("./teste3.gif");
-background-size: 75%;
-background-position: center center;   /* centralizado normal */
-background-position: center 40%;      /* sobe um pouco */
-background-position: center 70%;      /* desce um pouco */
-background-position: 40% center;      /* vai mais pra esquerda */
-background-position: 60% center;      /* vai mais pra direita */
-background-position: 55% 130%;         /* direita + um pouco pra cima */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   filter:blur(8px) scale(1.08);
