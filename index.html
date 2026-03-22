@@ -1,201 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <style>
-  
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
 
 body {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 35%),
-    linear-gradient(135deg, #0b0b0f, #11131a, #090909);
+  background-color: rgb(61,64,62);
   color: #fff;
   overflow: hidden;
   position: relative;
 }
 
-/* fundo blur */
-body::before {
+  /* fundo blur */
+ body::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background-image: url("./fred.webp");
-  background-size: cover;
+  inset: 50px;
+  background-image: url("./fredzinho.gif");
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  filter:blur(8px) scale(1.08);
   z-index: 0;
-}
-
-.profile-card {
-  position: relative;
-  z-index: 1;
-  width: 90%;
-  max-width: 420px;
-  padding: 32px 24px;
   border-radius: 24px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.03) 30%,
-    rgba(90, 0, 0, 0.28) 65%,
-    rgba(170, 10, 10, 0.40) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  box-shadow:
-    0 10px 40px rgba(0, 0, 0, 0.45),
-    0 0 30px rgba(255, 0, 0, 0.12);
-  text-align: center;
 }
 
-.avatar {
-  width: 110px;
-  height: 110px;
-  margin: 0 auto 18px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 3px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
-}
-
-.avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.username {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  letter-spacing: -0.5px;
-}
-
-.bio {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.72);
-  line-height: 1.5;
-  margin-bottom: 24px;
-}
-
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.links a {
-  text-decoration: none;
-  color: #fff;
-  padding: 14px 18px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: 0.25s ease;
-  font-weight: 500;
-  box-shadow: inset 0 0 0 rgba(255,255,255,0);
-}
-
-.links a:hover {
-  transform: translateY(-2px) scale(1.01);
-  background: rgba(255, 255, 255, 0.11);
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.25),
-    0 0 18px rgba(255, 255, 255, 0.05);
-}
-
-.socials {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 22px;
-}
-
-.socials a {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: rgba(255, 255, 255, 0.07);
-  color: #fff;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: 0.25s ease;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.socials a:hover {
-  transform: scale(1.08);
-  background: rgba(255,255,255,0.12);
-}
-
-@media (max-width: 480px) {
   .profile-card {
-    padding: 26px 18px;
-    border-radius: 20px;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    padding: 32px 24px;
+    border-radius: 24px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.03) 30%,
+      rgba(90, 0, 0, 0.28) 65%,
+      rgba(170, 10, 10, 0.40) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow:
+      0 10px 40px rgba(0, 0, 0, 0.45),
+      0 0 30px rgba(255, 0, 0, 0.12);
+    text-align: center;
+  }
+
+  .avatar {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .username {
-    font-size: 1.35rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
   }
 
   .bio {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.5;
+    margin-bottom: 24px;
   }
-}
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .links a {
+    text-decoration: none;
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: 0.25s ease;
+    font-weight: 500;
+    box-shadow: inset 0 0 0 rgba(255,255,255,0);
+  }
+
+  .links a:hover {
+    transform: translateY(-2px) scale(1.01);
+    background: rgba(255, 255, 255, 0.11);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.25),
+      0 0 18px rgba(255, 255, 255, 0.05);
+  }
+
+  .socials {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 22px;
+  }
+
+  .socials a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: 0.25s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .socials a:hover {
+    transform: scale(1.08);
+    background: rgba(255,255,255,0.12);
+  }
+
+  @media (max-width: 480px) {
+    .profile-card {
+      padding: 26px 18px;
+      border-radius: 20px;
+    }
+
+    .username {
+      font-size: 1.35rem;
+    }
+
+    .bio {
+      font-size: 0.9rem;
+    }
+  }
 </style>
 <body>
 
-    
-    <div class="profile-card">
-  <div class="avatar">
-    <img src="./Antonieta.jpg" alt="Avatar">
+  <div class="profile-card">
+    <div class="avatar">
+      <img src="./Antonieta.jpg" alt="Avatar">
+    </div>
+
+    <h1 class="username">@geniodabolla</h1>
+    <p class="bio">
+      aoba, gênio ao vivo todos os dias bro. <br>✦ A partir das 19:00 ✦
+    </p>
+
+    <div class="links">
+      <a href="https://discord.com/invite/PwJFGQR9H3" target="_blank">Discord</a>
+      <a href="https://livepix.gg/geniodabola" target="_blank">Live Pix</a>
+      <a href="https://www.tiktok.com/@geniodabolla?lang=pt-BR" target="_blank">TikTok</a>
+      <a href="https://www.twitch.tv/geniodabolla" target="_blank">Twitch</a>
+      <a href="https://www.instagram.com/nikuberg" target="_blank">Instagram</a>
+    </div>
+
+    <div class="socials">
+      <a href="https://discord.gg/ZWcPTWFk" target="_blank">
+        <i class="fa-brands fa-discord"></i>
+      </a>
+      <a href="https://www.tiktok.com/@geniodabolla?lang=pt-BR" target="_blank">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+      <a href="https://www.twitch.tv/geniodabolla" target="_blank">
+        <i class="fa-brands fa-twitch"></i>
+      </a>
+    </div>
   </div>
 
-  <h1 class="username">@geniodabolla</h1>
-  <p class="bio">
-    aoba, gênio ao vivo todos os dias bro.   <br>✦ A partir das 19:00 ✦ 
-  </p>
-
-  <div class="links">
-    <a href="https://discord.com/invite/PwJFGQR9H3" target="_blank">Discord</a>
-    <a href="https://livepix.gg/geniodabola" target="_blank">Live Pix</a>
-    <a href="https://www.tiktok.com/@geniodabolla?lang=pt-BR" target="_blank">TikTok</a>
-    <a href="https://www.twitch.tv/geniodabolla" target="_blank">Twitch</a>
-    <a href="https://www.instagram.com/nikuberg" target="_blank">Instagram</a>
-
-  </div>
-
- <div class="socials">
-  <a href="https://discord.gg/ZWcPTWFk" target="_blank">
-    <i class="fa-brands fa-discord"></i>
-  </a>
-  <a href="https://www.tiktok.com/@geniodabolla?lang=pt-BR" target="_blank">
-    <i class="fa-brands fa-tiktok"></i>
-  </a>
-   <a href="https://www.twitch.tv/geniodabolla" target="_blank">
-    <i class="fa-brands fa-twitch"></i>
-  </a> 
-</div>
-</div>
 </body>
 </html>
