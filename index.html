@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <link rel="preload" as="image" href="./Fredzinho2.gif">
-<link rel="preload" as="image" href="./Gif.gif">
+  <link rel="preload" as="video" href="./Fredzinho2.mp4" type="video/mp4">
+  <link rel="preload" as="image" href="./Gif.gif">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Genio da Bolla</title>
@@ -36,28 +36,31 @@
     transition: background-image 0.35s ease, background-size 0.35s ease, background-position 0.35s ease;
   }
 
-  /* camada do fundo do modo VIP */
-  body::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-    background-image: url("./Fredzinho2.gif");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
   body.VIP-active {
     background-image: none;
     background-color: rgb(61, 64, 62);
   }
 
-  body.VIP-active::before {
-    opacity: 1;
+  .vip-video-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: rgb(61, 64, 62);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .vip-video-bg.active {
+    display: flex;
+  }
+
+  .vip-video-bg video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
   }
 
   .page {
@@ -301,8 +304,9 @@
   }
 
   @media (max-width: 768px) {
-    body::before {
-      background-size: 85%;
+    .vip-video-bg video {
+      width: 88%;
+      height: 88%;
     }
 
     .VIP-card {
@@ -315,8 +319,9 @@
       padding: 16px;
     }
 
-    body::before {
-      background-size: 92%;
+    .vip-video-bg video {
+      width: 94%;
+      height: 94%;
     }
 
     .profile-card {
@@ -344,6 +349,12 @@
 </style>
 
 <body>
+
+  <div class="vip-video-bg" id="vipVideoBg">
+    <video id="vipVideo" muted loop playsinline preload="auto">
+      <source src="./Fredzinho2.mp4" type="video/mp4">
+    </video>
+  </div>
 
   <div class="page" id="homePage">
     <div class="profile-card">
@@ -387,33 +398,31 @@
         Sendo VIP, você desbloqueia vantagens especiais nas lives e nas partidas:
       </p>
 
-      
       <ul class="benefits-list">
-  <li>
-    <strong>Prioridade para continuar de survivor</strong><br>
-    Se você já estiver jogando comigo, pode ter prioridade para continuar nas próximas partidas.
-    <strong>(1 vez por live)</strong>
-  </li>
+        <li>
+          <strong>Prioridade para continuar de survivor</strong><br>
+          Se você já estiver jogando comigo, pode ter prioridade para continuar nas próximas partidas.
+          <strong>(1 vez por live)</strong>
+        </li>
 
-  <li>
-    <strong>Fura-fila para jogar de killer</strong><br>
-    Você pode passar na frente da fila para escolher a vez de jogar de killer.
-    <strong>(1 vez por live)</strong>
-  </li>
+        <li>
+          <strong>Fura-fila para jogar de killer</strong><br>
+          Você pode passar na frente da fila para escolher a vez de jogar de killer.
+          <strong>(1 vez por live)</strong>
+        </li>
 
-  <li>
-    <strong>Escolha de survivor + perks</strong><br>
-    Você pode escolher <strong>1 survivor e 4 perks</strong> para eu usar em uma partida.
-    <strong>(2 vezes por live)</strong>
-  </li>
+        <li>
+          <strong>Escolha de survivor + perks</strong><br>
+          Você pode escolher <strong>1 survivor e 4 perks</strong> para eu usar em uma partida.
+          <strong>(2 vezes por live)</strong>
+        </li>
 
-  <li>
-    <strong>Escolha de killer + perks</strong><br>
-    Você pode escolher <strong>1 killer e 4 perks</strong> para eu jogar em uma partida.
-    <strong>(2 vezes por live)</strong>
-  </li>
-</ul>
-
+        <li>
+          <strong>Escolha de killer + perks</strong><br>
+          Você pode escolher <strong>1 killer e 4 perks</strong> para eu jogar em uma partida.
+          <strong>(2 vezes por live)</strong>
+        </li>
+      </ul>
 
       <div class="VIP-actions">
         <a class="VIP-main-btn" href="https://livepix.gg/geniodabola" target="_blank">Seja VIP</a>
@@ -428,17 +437,27 @@
     const VIPPage = document.getElementById("VIPPage");
     const openVIPPage = document.getElementById("openVIPPage");
     const backToHome = document.getElementById("backToHome");
+    const vipVideoBg = document.getElementById("vipVideoBg");
+    const vipVideo = document.getElementById("vipVideo");
 
     openVIPPage.addEventListener("click", () => {
       homePage.classList.add("hidden");
       VIPPage.classList.remove("hidden");
       body.classList.add("VIP-active");
+
+      vipVideoBg.classList.add("active");
+      vipVideo.currentTime = 0;
+      vipVideo.play().catch(() => {});
     });
 
     backToHome.addEventListener("click", () => {
       VIPPage.classList.add("hidden");
       homePage.classList.remove("hidden");
       body.classList.remove("VIP-active");
+
+      vipVideo.pause();
+      vipVideo.currentTime = 0;
+      vipVideoBg.classList.remove("active");
     });
   </script>
 
