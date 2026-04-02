@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Genio da Bolla</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
   * {
     margin: 0;
@@ -16,29 +17,59 @@
     font-family: 'Inter', sans-serif;
   }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(61,64,62);
-  color: #fff;
-  overflow: hidden;
-  position: relative;
-}
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(61, 64, 62);
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+    background-image: url("./Gif.gif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.35s ease, background-size 0.35s ease, background-position 0.35s ease;
+  }
 
-  /* fundo blur */
- body::before {
-  content: "";
-  position: absolute;
-  inset: 50px;
-  background-image: url("./fredzinho.gif");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 0;
-  border-radius: 24px;
-}
+  /* camada do fundo do modo VIP */
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    background-image: url("./Fredzinho2.gif");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  body.VIP-active {
+    background-image: none;
+    background-color: rgb(61, 64, 62);
+  }
+
+  body.VIP-active::before {
+    opacity: 1;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hidden {
+    display: none;
+  }
 
   .profile-card {
     position: relative;
@@ -49,16 +80,29 @@ body {
     border-radius: 24px;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.06) 0%,
-      rgba(255, 255, 255, 0.03) 30%,
-      rgba(90, 0, 0, 0.28) 65%,
-      rgba(170, 10, 10, 0.40) 100%
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.02) 30%,
+      rgba(90, 0, 0, 0.18) 65%,
+      rgba(170, 10, 10, 0.24) 100%
     );
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow:
-      0 10px 40px rgba(0, 0, 0, 0.45),
-      0 0 30px rgba(255, 0, 0, 0.12);
+      0 10px 30px rgba(0, 0, 0, 0.28),
+      0 0 18px rgba(255, 0, 0, 0.08);
     text-align: center;
+    backdrop-filter: blur(3px);
+  }
+
+  .VIP-card {
+    max-width: 700px;
+    text-align: left;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.015) 30%,
+      rgba(70, 0, 0, 0.14) 65%,
+      rgba(120, 10, 10, 0.18) 100%
+    );
   }
 
   .avatar {
@@ -67,8 +111,8 @@ body {
     margin: 0 auto 18px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+    border: 3px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 22px rgba(255, 255, 255, 0.06);
   }
 
   .avatar img {
@@ -87,7 +131,7 @@ body {
 
   .bio {
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.72);
+    color: rgba(255, 255, 255, 0.76);
     line-height: 1.5;
     margin-bottom: 24px;
   }
@@ -98,25 +142,43 @@ body {
     gap: 12px;
   }
 
-  .links a {
+  .links a,
+  .links button {
     text-decoration: none;
     color: #fff;
     padding: 14px 18px;
     border-radius: 14px;
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.08);
     transition: 0.25s ease;
     font-weight: 500;
     box-shadow: inset 0 0 0 rgba(255,255,255,0);
+    cursor: pointer;
+    font-size: 0.95rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
   }
 
-  .links a:hover {
+  .links a:hover,
+  .links button:hover {
     transform: translateY(-2px) scale(1.01);
-    background: rgba(255, 255, 255, 0.11);
-    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.15);
     box-shadow:
-      0 8px 20px rgba(0, 0, 0, 0.25),
-      0 0 18px rgba(255, 255, 255, 0.05);
+      0 8px 20px rgba(0, 0, 0, 0.22),
+      0 0 14px rgba(255, 255, 255, 0.04);
+  }
+
+  .VIP-trigger {
+    background: linear-gradient(
+      135deg,
+      rgba(160, 20, 20, 0.46),
+      rgba(110, 0, 0, 0.62)
+    ) !important;
+    font-weight: 700 !important;
   }
 
   .socials {
@@ -132,20 +194,129 @@ body {
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.06);
     color: #fff;
     text-decoration: none;
     font-size: 1rem;
     transition: 0.25s ease;
     border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(4px);
   }
 
   .socials a:hover {
     transform: scale(1.08);
-    background: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.11);
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .section-VIPtitle {
+    font-size: 0.98rem;
+    color: rgba(255, 255, 255, 0.82);
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .benefits-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+
+  .benefits-list li {
+    position: relative;
+    padding-left: 22px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.96rem;
+  }
+
+  .benefits-list li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgba(255, 180, 180, 0.95);
+    font-weight: 700;
+  }
+
+  .VIP-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .VIP-main-btn,
+  .VIP-back-btn {
+    width: 100%;
+    max-width: 300px;
+    min-height: 52px;
+    text-decoration: none;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.25s ease;
+  }
+
+  .VIP-main-btn {
+    background: linear-gradient(
+      135deg,
+      rgba(180, 20, 20, 0.58),
+      rgba(120, 0, 0, 0.72)
+    );
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.10);
+  }
+
+  .VIP-main-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+  }
+
+  .VIP-back-btn {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .VIP-back-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.11);
+  }
+
+  @media (max-width: 768px) {
+    body::before {
+      background-size: 85%;
+    }
+
+    .VIP-card {
+      max-width: 100%;
+    }
   }
 
   @media (max-width: 480px) {
+    body {
+      padding: 16px;
+    }
+
+    body::before {
+      background-size: 92%;
+    }
+
     .profile-card {
       padding: 26px 18px;
       border-radius: 20px;
@@ -158,40 +329,116 @@ body {
     .bio {
       font-size: 0.9rem;
     }
+
+    .section-title {
+      font-size: 1.45rem;
+    }
+
+    .section-VIPtitle,
+    .benefits-list li {
+      font-size: 0.9rem;
+    }
   }
 </style>
+
 <body>
 
-  <div class="profile-card">
-    <div class="avatar">
-      <img src="./Antonieta.jpg" alt="Avatar">
-    </div>
+  <div class="page" id="homePage">
+    <div class="profile-card">
+      <div class="avatar">
+        <img src="./Antonieta.jpg" alt="Avatar">
+      </div>
 
-    <h1 class="username">@geniodabolla</h1>
-    <p class="bio">
-      aoba, gênio ao vivo todos os dias bro. <br>✦ A partir das 19:00 ✦
-    </p>
+      <h1 class="username">@geniodabolla</h1>
+      <p class="bio">
+        aoba, gênio ao vivo todos os dias bro. <br>✦ A partir das 19:00 ✦
+      </p>
 
-    <div class="links">
-      <a href="https://discord.com/invite/PwJFGQR9H3" target="_blank">Discord</a>
-      <a href="https://livepix.gg/geniodabola" target="_blank">Live Pix</a>
-      <a href="https://www.tiktok.com/@geniodabolla?lang=pt-BR" target="_blank">TikTok</a>
-      <a href="https://www.twitch.tv/geniodabolla" target="_blank">Twitch</a>
-      <a href="https://www.instagram.com/nikuberg" target="_blank">Instagram</a>
-    </div>
+      <div class="links">
+        <a href="https://discord.com/invite/PwJFGQR9H3" target="_blank">Discord</a>
+        <a href="https://livepix.gg/geniodabola" target="_blank">Live Pix</a>
+        <a href="https://www.tiktok.com/@geniodabolla?lang=pt-BR" target="_blank">TikTok</a>
+        <a href="https://www.twitch.tv/geniodabolla" target="_blank">Twitch</a>
+        <a href="https://www.instagram.com/nikuberg" target="_blank">Instagram</a>
+        <button class="VIP-trigger" id="openVIPPage">Seja VIP</button>
+      </div>
 
-    <div class="socials">
-      <a href="https://discord.gg/ZWcPTWFk" target="_blank">
-        <i class="fa-brands fa-discord"></i>
-      </a>
-      <a href="https://www.tiktok.com/@geniodabolla?lang=pt-BR" target="_blank">
-        <i class="fa-brands fa-tiktok"></i>
-      </a>
-      <a href="https://www.twitch.tv/geniodabolla" target="_blank">
-        <i class="fa-brands fa-twitch"></i>
-      </a>
+      <div class="socials">
+        <a href="https://discord.gg/ZWcPTWFk" target="_blank">
+          <i class="fa-brands fa-discord"></i>
+        </a>
+        <a href="https://www.tiktok.com/@geniodabolla?lang=pt-BR" target="_blank">
+          <i class="fa-brands fa-tiktok"></i>
+        </a>
+        <a href="https://www.twitch.tv/geniodabolla" target="_blank">
+          <i class="fa-brands fa-twitch"></i>
+        </a>
+      </div>
     </div>
   </div>
+
+  <div class="page hidden" id="VIPPage">
+    <div class="profile-card VIP-card">
+      <h2 class="section-title">Benefícios de ser VIP</h2>
+
+      <p class="section-VIPtitle">
+        Sendo VIP, você desbloqueia vantagens especiais nas lives e nas partidas:
+      </p>
+
+      
+      <ul class="benefits-list">
+  <li>
+    <strong>Prioridade para continuar de survivor</strong><br>
+    Se você já estiver jogando comigo, pode ter prioridade para continuar nas próximas partidas.
+    <strong>(1 vez por live)</strong>
+  </li>
+
+  <li>
+    <strong>Fura-fila para jogar de killer</strong><br>
+    Você pode passar na frente da fila para escolher a vez de jogar de killer.
+    <strong>(1 vez por live)</strong>
+  </li>
+
+  <li>
+    <strong>Escolha de survivor + perks</strong><br>
+    Você pode escolher <strong>1 survivor e 4 perks</strong> para eu usar em uma partida.
+    <strong>(2 vezes por live)</strong>
+  </li>
+
+  <li>
+    <strong>Escolha de killer + perks</strong><br>
+    Você pode escolher <strong>1 killer e 4 perks</strong> para eu jogar em uma partida.
+    <strong>(2 vezes por live)</strong>
+  </li>
+</ul>
+
+
+      <div class="VIP-actions">
+        <a class="VIP-main-btn" href="https://livepix.gg/geniodabola" target="_blank">Seja VIP</a>
+        <button class="VIP-back-btn" id="backToHome">Voltar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const body = document.body;
+    const homePage = document.getElementById("homePage");
+    const VIPPage = document.getElementById("VIPPage");
+    const openVIPPage = document.getElementById("openVIPPage");
+    const backToHome = document.getElementById("backToHome");
+
+    openVIPPage.addEventListener("click", () => {
+      homePage.classList.add("hidden");
+      VIPPage.classList.remove("hidden");
+      body.classList.add("VIP-active");
+    });
+
+    backToHome.addEventListener("click", () => {
+      VIPPage.classList.add("hidden");
+      homePage.classList.remove("hidden");
+      body.classList.remove("VIP-active");
+    });
+  </script>
 
 </body>
 </html>
